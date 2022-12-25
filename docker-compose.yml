@@ -1,0 +1,56 @@
+version: '3.9'
+
+# Docker Networks
+networks:
+  entity-filter:
+    driver: bridge
+
+services:
+  api:
+    container_name: api-entity-filter
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    env_file:
+        - .env
+    volumes:
+      - .:/usr/src/app
+    # Run in dev Mode: npm run start:dev
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - entity-filter
+  redis: 
+    image: redis
+    container_name: redis-entity-filter
+    ports:
+      - 6380:6379
+    volumes: 
+      - redis:/data
+    networks:
+      - entity-filter
+  postgres:
+    image: postgres
+    container_name: postgres-entity-filter
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports: 
+      - '5434:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - entity-filter
+
+volumes:
+  postgres:
+  redis:
+    driver: local

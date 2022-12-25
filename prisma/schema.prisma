@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Entity {
+  id                    Int       @default(autoincrement()) @id
+  name                  String
+  identificationNumber  String
+  expirationDate        String
+  contactName           String
+  contactEmail          String
+  logo                  String
+  startId               Int
+  endId                 Int
+  active                Boolean?  @default(true)
+  createdAt             DateTime  @default(now())
+}
+
+model EntityCodes {
+  id                    Int       @default(autoincrement()) @id
+  codeRangeId           Int
+}
