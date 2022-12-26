@@ -19,7 +19,7 @@ CREATE TABLE "Entity" (
 CREATE TABLE "EntityCodes" (
     "id" SERIAL NOT NULL,
     "codeRangeId" INTEGER NOT NULL,
-    "entityId" INTEGER,
+    "entityId" INTEGER NOT NULL,
     "active" BOOLEAN DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -27,4 +27,4 @@ CREATE TABLE "EntityCodes" (
 );
 
 -- AddForeignKey
-ALTER TABLE "EntityCodes" ADD CONSTRAINT "EntityCodes_entityId_fkey" FOREIGN KEY ("entityId") REFERENCES "Entity"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "EntityCodes" ADD CONSTRAINT "EntityCodes_entityId_fkey" FOREIGN KEY ("entityId") REFERENCES "Entity"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Entity {
-  id                    Int       @default(autoincrement()) @id
+  id                    Int       @id @default(autoincrement())
   name                  String
   identificationNumber  String
   expirationDate        String
@@ -27,7 +27,7 @@ model Entity {
 }
 
 model EntityCodes {
-  id                    Int       @default(autoincrement()) @id
+  id                    Int       @id @default(autoincrement())
   codeRangeId           Int
   entity                Entity    @relation(fields: [entityId], references: [id])
   entityId              Int
