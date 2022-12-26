@@ -29,8 +29,8 @@ model Entity {
 model EntityCodes {
   id                    Int       @default(autoincrement()) @id
   codeRangeId           Int
-  entityId              Int?
-  entities              Entity?   @relation(fields: [entityId], references: [id])
+  entity                Entity    @relation(fields: [entityId], references: [id])
+  entityId              Int
   active                Boolean?  @default(true)
   createdAt             DateTime  @default(now())
 }
