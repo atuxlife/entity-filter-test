@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prisma:generate": "npx prisma generate"
   },
   "dependencies": {
     "@fastify/static": "^6.6.0",
@@ -27,6 +28,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-fastify": "^9.2.1",
     "@nestjs/swagger": "^6.1.4",
+    "@prisma/client": "^4.8.0",
     "cache-manager": "^4.1.0",
     "cache-manager-redis-store": "^2.0.0",
     "fastify-swagger": "^5.2.0",
@@ -39,7 +41,7 @@
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@types/jest": "28.1.8",
-    "@types/node": "^16.0.0",
+    "@types/node": "^16.18.10",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -53,9 +55,9 @@
     "supertest": "^6.1.3",
     "ts-jest": "28.0.8",
     "ts-loader": "^9.2.3",
-    "ts-node": "^10.0.0",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.4"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -73,5 +75,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node src/prisma/seed.ts"
   }
 }

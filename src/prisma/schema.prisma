@@ -23,9 +23,14 @@ model Entity {
   endId                 Int
   active                Boolean?  @default(true)
   createdAt             DateTime  @default(now())
+  entities              EntityCodes[]
 }
 
 model EntityCodes {
   id                    Int       @default(autoincrement()) @id
   codeRangeId           Int
+  entityId              Int?
+  entities              Entity?   @relation(fields: [entityId], references: [id])
+  active                Boolean?  @default(true)
+  createdAt             DateTime  @default(now())
 }
