@@ -2,7 +2,7 @@ import {
   Controller,
   Get,
   HttpStatus,
-  // NotFoundException,
+  NotFoundException,
   Param,
   Res,
 } from '@nestjs/common';
@@ -26,7 +26,7 @@ export class AppController {
     @Param('entityId') entityId: string,
   ): Promise<JSON> {
     const entity = await this.appService.getEntity(entityId);
-    /*if (!entity) throw new NotFoundException('Entity does not exist!');*/
+    if (!entity) throw new NotFoundException('Entity does not exist!');
     return res.status(HttpStatus.OK).send(entity);
   }
 }
